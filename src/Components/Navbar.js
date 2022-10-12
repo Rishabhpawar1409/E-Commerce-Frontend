@@ -14,10 +14,10 @@ function Navbar({ handleInput }) {
 
   const handleChange = (e) => {
     setInput(e.target.value);
-    handleInput();
   };
 
   const handleSubmit = () => {
+    handleInput(input);
     setInput("");
     products.map((product) => {
       return product.title.includes(input) ? console.log(product) : "";
