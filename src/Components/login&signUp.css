@@ -102,12 +102,12 @@
   width: 270px;
   border: 1px solid grey;
 }
-.input-password:hover {
-  border: 2px solid black;
+.input-passwordAmazon:hover {
+  border: 2px solid #cd9042;
 }
 
 .input:hover {
-  border: 2px solid black;
+  border: 2px solid #cd9042;
 }
 
 .button-login {

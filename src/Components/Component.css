@@ -4,6 +4,13 @@
   grid-template-columns: repeat(4, 25%);
   grid-template-rows: repeat(2, 375px);
 }
+.searchWindow {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .product_container {
   width: 300px;
   height: 350px;
