@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { CartState } from "../context/Context";
 import { FaShoppingCart } from "react-icons/fa";
 import Badge from "@mui/material/Badge";
@@ -6,10 +6,23 @@ import "../../public/styles.css";
 import "./Component.css";
 import { Link } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ handleInput }) {
+  const [input, setInput] = useState("");
   const {
-    state: { cart }
+    state: { cart, products }
   } = CartState();
+
+  const handleChange = (e) => {
+    setInput(e.target.value);
+    handleInput();
+  };
+
+  const handleSubmit = () => {
+    setInput("");
+    products.map((product) => {
+      return product.title.includes(input) ? console.log(product) : "";
+    });
+  };
   return (
     <nav className="d-flex none">
       <Link to="/">
@@ -19,8 +32,19 @@ function Navbar() {
       </Link>
 
       <div className="search d-flex">
-        <input type="text" />
-        <i className="fas fa-search"></i>
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => {
+            handleChange(e);
+          }}
+        />
+        <i
+          className="fas fa-search"
+          onClick={() => {
+            handleSubmit();
+          }}
+        ></i>
       </div>
       <ul className="nav_menu d-flex">
         <li>

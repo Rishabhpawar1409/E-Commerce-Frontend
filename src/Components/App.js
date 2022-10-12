@@ -5,10 +5,13 @@ import Cart from "./Cart";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
+  const handleInput = () => {
+    console.log("yes it worked out!!");
+  };
   return (
     <Router>
       <div className="App">
-        <Navbar />
+        <Navbar handleInput={handleInput} />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/cart" element={<Cart />} />
