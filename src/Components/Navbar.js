@@ -6,7 +6,7 @@ import "../../public/styles.css";
 import "./Component.css";
 import { Link } from "react-router-dom";
 
-function Navbar({ handleInput }) {
+function Navbar({ handleInput, emptyState }) {
   const [input, setInput] = useState("");
   const {
     state: { cart, products }
@@ -17,16 +17,24 @@ function Navbar({ handleInput }) {
   };
 
   const handleSubmit = () => {
-    handleInput(input);
     setInput("");
     products.map((product) => {
-      return product.title.includes(input) ? console.log(product) : "";
+      return product.title.includes(input) ? handleInput(product) : "";
     });
+  };
+
+  const handleState = () => {
+    emptyState();
   };
   return (
     <nav className="d-flex none">
       <Link to="/">
-        <div className="logo">
+        <div
+          className="logo"
+          onClick={() => {
+            handleState();
+          }}
+        >
           <img src="Assets/logo.png" alt="Amazon" />
         </div>
       </Link>
@@ -39,12 +47,16 @@ function Navbar({ handleInput }) {
             handleChange(e);
           }}
         />
-        <i
-          className="fas fa-search"
-          onClick={() => {
-            handleSubmit();
-          }}
-        ></i>
+        {input.length ? (
+          <i
+            className="fas fa-search"
+            onClick={() => {
+              handleSubmit();
+            }}
+          ></i>
+        ) : (
+          ""
+        )}
       </div>
       <ul className="nav_menu d-flex">
         <li>
