@@ -6,11 +6,17 @@
   height: 100vh;
   background-color: white;
 }
+.logo-image {
+  margin-left: 5rem;
+  margin-top: 1rem;
+  height: 50px;
+  widows: 50px;
+}
 .header-1 {
-  color: blueviolet;
+  color: black;
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
+  margin-top: 0.25rem;
 }
 .google-icon {
   font-size: 35px;
@@ -82,26 +88,26 @@
   font-size: 15px;
   padding-left: 5px;
   margin-top: 1rem;
-  margin-left: 0.75rem;
+  margin-left: 0.95rem;
   height: 30px;
   width: 270px;
   border-radius: 0.25rem;
   border: 1px solid grey;
 }
-.input-password {
+.input-passwordAmazon {
   font-size: 15px;
   padding-left: 0.4rem;
   height: 30px;
   border-radius: 0.25rem;
-  width: 300px;
+  width: 270px;
   border: 1px solid grey;
 }
 .input-password:hover {
-  border: 2px solid blueviolet;
+  border: 2px solid black;
 }
 
 .input:hover {
-  border: 2px solid blueviolet;
+  border: 2px solid black;
 }
 
 .button-login {
@@ -110,13 +116,13 @@
   margin-top: 1rem;
   height: 30px;
   width: 65px;
-  background-color: blueviolet;
+  background-color: #cd9042;
   border: none;
   border-radius: 4px;
-  color: white;
+  color: black;
 }
 .button-login:hover {
-  border: 1px solid white;
+  border: 1px solid black;
 }
 .login-text {
   margin-top: 7px;

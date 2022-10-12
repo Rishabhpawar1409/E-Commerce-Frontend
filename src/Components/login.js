@@ -53,7 +53,8 @@ function Login() {
   return (
     <div className="login-container">
       <div className="login">
-        <h2 className="header-1">Amazon</h2>
+        <img src="Assets/logo.png" alt="amazon" className="logo-image" />
+        {/* <h2 className="header-1">Amazon</h2> */}
         {error && (
           <Alert className="error" variant="danger">
             {error}
@@ -70,7 +71,7 @@ function Login() {
         <div className="input-password-container">
           <input
             type={weWillDecide()}
-            className="input-password"
+            className="input-passwordAmazon"
             placeholder="Password"
             onChange={(e) => {
               setPassword(e.target.value);

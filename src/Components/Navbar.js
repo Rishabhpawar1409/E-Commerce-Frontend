@@ -83,7 +83,13 @@ function Navbar({ handleInput, emptyState }) {
           <p>
             Hello Guest <br />
             <Link to="/signUp" className="login/signup-text">
-              <span>Sign Up</span>
+              <span
+                onClick={() => {
+                  handleState();
+                }}
+              >
+                Sign Up
+              </span>
             </Link>
           </p>
         </li>
@@ -92,7 +98,13 @@ function Navbar({ handleInput, emptyState }) {
             <p>
               Hello Guest <br />
               <Link to="/login" className="login/signup-text">
-                <span>Sign In</span>
+                <span
+                  onClick={() => {
+                    handleState();
+                  }}
+                >
+                  Sign In
+                </span>
               </Link>
             </p>
           </li>
@@ -102,6 +114,7 @@ function Navbar({ handleInput, emptyState }) {
               <span
                 onClick={() => {
                   handleLogOut();
+                  handleState();
                 }}
               >
                 Log Out

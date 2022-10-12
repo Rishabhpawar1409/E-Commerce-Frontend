@@ -27,22 +27,39 @@ function App() {
 
           {state ? <SearchResults state={state} /> : ""}
           <Routes>
-            <Route exact path="/signUp" element={<SignUp />} />
-            <Route exact path="/login" element={<Login />} />
             {state ? (
               ""
             ) : (
-              <Route
-                exact
-                path="/"
-                element={
-                  <ProtectedRoute>
-                    <Home />
-                  </ProtectedRoute>
-                }
-              />
+              <>
+                <Route
+                  exact
+                  path="/signUp"
+                  element={<SignUp />}
+                  emptyState={emptyState}
+                />
+                <Route
+                  exact
+                  path="/login"
+                  element={<Login />}
+                  emptyState={emptyState}
+                />
+                <Route
+                  exact
+                  path="/"
+                  element={
+                    <ProtectedRoute>
+                      <Home />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  exact
+                  path="/cart"
+                  element={<Cart />}
+                  emptyState={emptyState}
+                />
+              </>
             )}
-            <Route exact path="/cart" element={<Cart />} />
           </Routes>
         </div>
       </Router>
