@@ -3,7 +3,11 @@ import { Alert } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/userAuthContext";
 import { doc, setDoc, addDoc, collection } from "firebase/firestore";
-import { db } from "../todoFirebase";
+import { db } from "../firebase";
+import "./login&signUp.css";
+import { FaEyeSlash } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import { FaEye } from "react-icons/fa";
 
 function Login() {
   const { user } = useUserAuth();
@@ -12,12 +16,13 @@ function Login() {
   const [password, setPassword] = useState("");
   const [userLogin, setUserLogin] = useState(false);
   const [error, setError] = useState("");
+  const [eye, setEye] = useState(false);
+
   const { login, googleSignIn } = useUserAuth();
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     setError("");
-
     try {
       await login(email, password);
       setUserLogin(true);
@@ -25,8 +30,7 @@ function Login() {
       await addDoc(collection(db, "users"), {
         email
       });
-
-      navigate("/home");
+      navigate("/");
     } catch (err) {
       setError(err.message);
     }
@@ -34,49 +38,83 @@ function Login() {
   const handleGoogleLogIn = async () => {
     try {
       await googleSignIn();
-      navigate("/home");
+      navigate("/");
     } catch (err) {
       console.log(err.message);
     }
   };
+
+  const weWillDecide = () => {
+    if (eye === false) {
+      return "password";
+    }
+    return "text";
+  };
   return (
     <div className="login-container">
-      <h2>Firebase Auth Login</h2>
-      {error && <Alert variant="danger">{error}</Alert>}
-      <input
-        type="email"
-        placeholder="Email address"
-        onChange={(e) => {
-          setEmail(e.target.value);
-        }}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={(e) => {
-          setPassword(e.target.value);
-        }}
-      />
-      <button
-        onClick={() => {
-          handleLogin();
-        }}
-      >
-        Login
-      </button>
-      <p>
-        Sign In with{" "}
+      <div className="login">
+        <h2 className="header-1">Amazon</h2>
+        {error && (
+          <Alert className="error" variant="danger">
+            {error}
+          </Alert>
+        )}
+        <input
+          type="email"
+          className="input"
+          placeholder="Email address"
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+        />
+        <div className="input-password-container">
+          <input
+            type={weWillDecide()}
+            className="input-password"
+            placeholder="Password"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+          {password.length ? (
+            eye === false ? (
+              <div className="eye-container">
+                <FaEyeSlash onClick={() => setEye(true)} />
+              </div>
+            ) : (
+              <div className="eye-container">
+                <FaEye onClick={() => setEye(false)} />
+              </div>
+            )
+          ) : (
+            ""
+          )}
+        </div>
+
         <button
+          className="button-login"
+          onClick={() => {
+            handleLogin();
+          }}
+        >
+          Login
+        </button>
+
+        <p className="orText">or</p>
+
+        <div
+          className="googleBtn-container"
           onClick={() => {
             handleGoogleLogIn();
           }}
         >
-          Google
-        </button>
-      </p>
-      <p>
-        Don't have an account? <Link to="/signUp">Sign Up</Link>
-      </p>
+          <FcGoogle className="google-icon" />
+          <p className="login-text">Login with Google</p>
+        </div>
+        <p className="signUp-text">
+          Don't have an account? <Link to="/signUp">Sign Up</Link>
+        </p>
+      </div>
     </div>
   );
 }

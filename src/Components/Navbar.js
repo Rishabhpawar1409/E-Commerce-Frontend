@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CartState } from "../context/Context";
 import { FaShoppingCart } from "react-icons/fa";
 import Badge from "@mui/material/Badge";
 import "../../public/styles.css";
 import "./Component.css";
 import { Link } from "react-router-dom";
+import { useUserAuth } from "../context/userAuthContext";
 
 function Navbar({ handleInput, emptyState }) {
   const [input, setInput] = useState("");
+  const [isUser, setIsUser] = useState(false);
+  const [message, setMessage] = useState({ error: false, msg: "" });
+  const { user, logout } = useUserAuth();
+
+  useEffect(() => {
+    if (user) {
+      setIsUser(true);
+    }
+  }, [user]);
   const {
     state: { cart, products }
   } = CartState();
@@ -25,6 +35,16 @@ function Navbar({ handleInput, emptyState }) {
 
   const handleState = () => {
     emptyState();
+  };
+
+  const handleLogOut = async () => {
+    setIsUser(false);
+    try {
+      await logout();
+    } catch (err) {
+      setMessage({ error: true, msg: err.message });
+      console.log(message);
+    }
   };
   return (
     <nav className="d-flex none">
@@ -62,9 +82,34 @@ function Navbar({ handleInput, emptyState }) {
         <li>
           <p>
             Hello Guest <br />
-            <span>Sign In</span>
+            <Link to="/signUp" className="login/signup-text">
+              <span>Sign Up</span>
+            </Link>
           </p>
         </li>
+        {isUser === false ? (
+          <li>
+            <p>
+              Hello Guest <br />
+              <Link to="/login" className="login/signup-text">
+                <span>Sign In</span>
+              </Link>
+            </p>
+          </li>
+        ) : (
+          <li>
+            <p>
+              <span
+                onClick={() => {
+                  handleLogOut();
+                }}
+              >
+                Log Out
+              </span>
+            </p>
+          </li>
+        )}
+
         <li>
           <p>
             Return <br />
