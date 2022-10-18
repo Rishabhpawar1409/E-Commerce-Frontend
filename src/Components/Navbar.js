@@ -70,6 +70,7 @@ function Navbar({ handleInput, emptyState }) {
         {input.length ? (
           <i
             className="fas fa-search"
+            style={{ cursor: "pointer" }}
             onClick={() => {
               handleSubmit();
             }}
@@ -82,7 +83,7 @@ function Navbar({ handleInput, emptyState }) {
         <li>
           <p>
             Hello Guest <br />
-            <Link to="/signUp" className="login/signup-text">
+            <Link to="/signUp" className="loginSignUpLink">
               <span
                 onClick={() => {
                   handleState();
@@ -97,7 +98,7 @@ function Navbar({ handleInput, emptyState }) {
           <li>
             <p>
               Hello Guest <br />
-              <Link to="/login" className="login/signup-text">
+              <Link to="/login" className="loginSignUpLink">
                 <span
                   onClick={() => {
                     handleState();
@@ -112,6 +113,7 @@ function Navbar({ handleInput, emptyState }) {
           <li>
             <p>
               <span
+                className="loginSignUpLink"
                 onClick={() => {
                   handleLogOut();
                   handleState();

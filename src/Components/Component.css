@@ -34,6 +34,11 @@
   width: 45%;
   text-align: center;
 }
+.loginSignUpLink {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
 .button-cart button {
   padding: 5px;
   margin-bottom: 30px;
