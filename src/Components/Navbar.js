@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { CartState } from "../context/Context";
 import { FaShoppingCart } from "react-icons/fa";
 import Badge from "@mui/material/Badge";
-import "../../public/styles.css";
+import "../styles.css";
 import "./Component.css";
 import { Link } from "react-router-dom";
 import { useUserAuth } from "../context/userAuthContext";
