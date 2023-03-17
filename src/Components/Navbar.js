@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { CartState } from "../context/Context";
 import { FaShoppingCart } from "react-icons/fa";
-import Badge from "@mui/material/Badge";
 import "../styles.css";
 import "./Component.css";
 import { Link } from "react-router-dom";
@@ -19,7 +18,7 @@ function Navbar({ handleInput, emptyState }) {
     }
   }, [user]);
   const {
-    state: { cart, products }
+    state: { cart, products },
   } = CartState();
 
   const handleChange = (e) => {
@@ -139,9 +138,10 @@ function Navbar({ handleInput, emptyState }) {
         </li>
         <li>
           <Link to="/cart">
-            <Badge badgeContent={cart.length} color="primary">
+            Cart
+            {/* <Badge badgeContent={cart.length} color="primary">
               <FaShoppingCart className="cart-icon" color="white" />
-            </Badge>
+            </Badge> */}
           </Link>
         </li>
       </ul>
