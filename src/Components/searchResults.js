@@ -6,7 +6,7 @@ const SearchResults = ({ state }) => {
   return (
     <div className="searchWindow">
       <div className="SearchContainer">
-        <SingleProduct product={state} key={state.id} />;
+        <SingleProduct product={state} key={state.id} />
       </div>
     </div>
   );

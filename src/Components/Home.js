@@ -6,7 +6,7 @@ import "./Component.css";
 const Home = () => {
   // Destructuring my products state from reducer(CartState).
   const {
-    state: { products }
+    state: { products },
   } = CartState();
   //
   return (

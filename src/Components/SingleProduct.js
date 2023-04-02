@@ -6,7 +6,7 @@ import { BsFillStarFill, BsStarHalf } from "react-icons/bs";
 function SingleProduct({ product }) {
   const {
     state: { cart },
-    dispatch
+    dispatch,
   } = CartState();
 
   return (

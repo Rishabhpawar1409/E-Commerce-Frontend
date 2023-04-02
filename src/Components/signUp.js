@@ -31,13 +31,12 @@ function SignUp() {
   return (
     <div className="login-container">
       <div className="signUp">
-        <img src="Assets/logo.png" alt="amazon" className="logo-image" />
-        {/* <h2 className="header-1">Amazon</h2> */}
-        {error && (
-          <Alert className="error" variant="danger">
-            {error}
-          </Alert>
-        )}
+        <img
+          src="Assets/downloadAmazonLogo.png"
+          alt="amazon"
+          className="logo-image"
+        />
+        {error && <p> {error}</p>}
 
         <input
           type="email"

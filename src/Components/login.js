@@ -10,11 +10,8 @@ import { FcGoogle } from "react-icons/fc";
 import { FaEye } from "react-icons/fa";
 
 function Login() {
-  const { user } = useUserAuth();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userLogin, setUserLogin] = useState(false);
   const [error, setError] = useState("");
   const [eye, setEye] = useState(false);
 
@@ -25,12 +22,11 @@ function Login() {
     setError("");
     try {
       await login(email, password);
-      setUserLogin(true);
-      localStorage.setItem("user", JSON.stringify(userLogin));
-      await addDoc(collection(db, "users"), {
-        email
-      });
       navigate("/");
+
+      await addDoc(collection(db, "users"), {
+        email,
+      });
     } catch (err) {
       setError(err.message);
     }
@@ -53,13 +49,12 @@ function Login() {
   return (
     <div className="login-container">
       <div className="login">
-        <img src="Assets/logo.png" alt="amazon" className="logo-image" />
-        {/* <h2 className="header-1">Amazon</h2> */}
-        {error && (
-          <Alert className="error" variant="danger">
-            {error}
-          </Alert>
-        )}
+        <img
+          src="Assets/downloadAmazonLogo.png"
+          alt="amazon"
+          className="logo-image"
+        />
+        {error && <p> {error}</p>}
         <input
           type="email"
           className="input"

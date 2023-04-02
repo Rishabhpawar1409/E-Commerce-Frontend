@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { CartState } from "../context/Context";
 import { FaShoppingCart } from "react-icons/fa";
+import { BiLogOut } from "react-icons/bi";
+import { BiLogIn } from "react-icons/bi";
 import "../styles.css";
 import "./Component.css";
 import { Link } from "react-router-dom";
@@ -25,7 +27,8 @@ function Navbar({ handleInput, emptyState }) {
     setInput(e.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     setInput("");
     products.map((product) => {
       return product.title.includes(input) ? handleInput(product) : "";
@@ -58,8 +61,14 @@ function Navbar({ handleInput, emptyState }) {
         </div>
       </Link>
 
-      <div className="search d-flex">
+      <form
+        className="search d-flex"
+        onSubmit={(e) => {
+          handleSubmit(e);
+        }}
+      >
         <input
+          style={{ borderRadius: "5px" }}
           type="text"
           value={input}
           onChange={(e) => {
@@ -69,15 +78,20 @@ function Navbar({ handleInput, emptyState }) {
         {input.length ? (
           <i
             className="fas fa-search"
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-              handleSubmit();
+            style={{
+              cursor: "pointer",
+              borderRadius: "50%",
+              marginLeft: "0.35rem",
+            }}
+            onClick={(e) => {
+              handleSubmit(e);
             }}
           ></i>
         ) : (
           ""
         )}
-      </div>
+      </form>
+
       <ul className="nav_menu d-flex">
         <li>
           <p>
@@ -95,53 +109,83 @@ function Navbar({ handleInput, emptyState }) {
         </li>
         {isUser === false ? (
           <li>
-            <p>
-              Hello Guest <br />
-              <Link to="/login" className="loginSignUpLink">
-                <span
-                  onClick={() => {
-                    handleState();
-                  }}
-                >
-                  Sign In
-                </span>
-              </Link>
-            </p>
-          </li>
-        ) : (
-          <li>
-            <p>
+            <Link
+              to="/login"
+              className="loginSignUpLink"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                color: "white",
+                fontSize: "12px",
+              }}
+            >
+              <BiLogIn style={{ fontSize: "18px" }} />
               <span
-                className="loginSignUpLink"
                 onClick={() => {
-                  handleLogOut();
                   handleState();
                 }}
               >
-                Log Out
+                log in
               </span>
-            </p>
+            </Link>
+          </li>
+        ) : (
+          <li
+            onClick={() => {
+              handleLogOut();
+              handleState();
+            }}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              color: "white",
+              fontSize: "12px",
+            }}
+          >
+            <BiLogOut
+              className="loginSignUpLink"
+              style={{ fontSize: "18px" }}
+            />
+            <span style={{ cursor: "pointer" }}>log out</span>
           </li>
         )}
 
         <li>
-          <p>
-            Return <br />
-            <span>Orders</span>
-          </p>
-        </li>
-        <li>
-          <p>
-            Your <br />
-            <span>Prime</span>
-          </p>
-        </li>
-        <li>
           <Link to="/cart">
-            Cart
-            {/* <Badge badgeContent={cart.length} color="primary">
-              <FaShoppingCart className="cart-icon" color="white" />
-            </Badge> */}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <FaShoppingCart
+                className="cart-icon"
+                color="white"
+                style={{ position: "relative" }}
+              />
+              {cart.length > 0 && (
+                <div
+                  style={{
+                    height: "19px",
+                    width: "19px",
+                    backgroundColor: "cyan",
+                    borderRadius: "50%",
+                    marginBottom: "1rem",
+                    marginLeft: "1.25rem",
+                    position: "absolute",
+                    textAlign: "center",
+                    color: "black",
+                  }}
+                >
+                  {cart.length}
+                </div>
+              )}
+            </div>
           </Link>
         </li>
       </ul>
